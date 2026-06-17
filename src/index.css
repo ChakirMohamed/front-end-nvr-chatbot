@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f1f5f9;
+  color: #1e293b;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.card-hover {
+  transition: box-shadow 0.15s ease;
+}
+.card-hover:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.score-bar {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  width: var(--bar-w, 0%);
+}
+
+/* Step-based fill widths used by Analytics bars (avoids inline styles) */
+.fill-0   { width: 0%;   } .fill-5   { width: 5%;   } .fill-10  { width: 10%;  }
+.fill-15  { width: 15%;  } .fill-20  { width: 20%;  } .fill-25  { width: 25%;  }
+.fill-30  { width: 30%;  } .fill-35  { width: 35%;  } .fill-40  { width: 40%;  }
+.fill-45  { width: 45%;  } .fill-50  { width: 50%;  } .fill-55  { width: 55%;  }
+.fill-60  { width: 60%;  } .fill-65  { width: 65%;  } .fill-70  { width: 70%;  }
+.fill-75  { width: 75%;  } .fill-80  { width: 80%;  } .fill-85  { width: 85%;  }
+.fill-90  { width: 90%;  } .fill-95  { width: 95%;  } .fill-100 { width: 100%; }
+
+.bar-transition { transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+
+.chat-bubble-user {
+  background: #2563eb;
+  color: #ffffff;
+}
+.chat-bubble-bot {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #1e293b;
+}
+
+.pulse-dot {
+  animation: pulse-anim 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse-anim {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
