@@ -19,11 +19,20 @@ function objColor(obj: string) {
   return OBJ_COLORS[obj.toLowerCase()] ?? 'bg-slate-50 text-slate-600 border-slate-200';
 }
 
+// Tolerate either a real array or a comma-joined string (some API payloads
+// return the raw DB column), so a malformed event never crashes the card.
+function toObjectList(value: unknown): string[] {
+  if (Array.isArray(value)) return value;
+  if (typeof value === 'string') return value.split(',').map((o) => o.trim()).filter(Boolean);
+  return [];
+}
+
 export default function EventCard({ event, rank }: Props) {
   const ts = new Date(event.timestamp);
   const dateStr = ts.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
   const timeStr = ts.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   const scorePercent = Math.round(event.score * 100);
+  const detectedObjects = toObjectList(event.detected_objects);
 
   return (
     <div className="card card-hover p-4">
@@ -68,9 +77,9 @@ export default function EventCard({ event, rank }: Props) {
         </a>
       </div>
 
-      {event.detected_objects.length > 0 && (
+      {detectedObjects.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
-          {event.detected_objects.map((obj, i) => (
+          {detectedObjects.map((obj, i) => (
             <span key={i} className={`text-xs px-2 py-0.5 rounded-full border ${objColor(obj)}`}>
               {obj}
             </span>

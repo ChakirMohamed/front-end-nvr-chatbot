@@ -2,6 +2,7 @@ import { apiFetch } from './client';
 import type {
   HealthResponse,
   Camera,
+  LiveCamera,
   ChatResponse,
   SearchRequest,
   SearchResponse,
@@ -15,6 +16,14 @@ export const api = {
 
   cameras: () =>
     apiFetch<{ cameras: Camera[] }>('/cameras'),
+
+  liveCameras: () =>
+    apiFetch<{ cameras: LiveCamera[] }>('/live/cameras'),
+
+  // MJPEG stream URL — used directly as <img src>. cacheBust forces the browser
+  // to reopen the stream when remounting instead of reusing a closed connection.
+  liveUrl: (camera_id: string, cacheBust?: number) =>
+    `/api/live/${camera_id}${cacheBust ? `?t=${cacheBust}` : ''}`,
 
   chat: (message: string, session_id = 'default') =>
     apiFetch<ChatResponse>('/chat', {

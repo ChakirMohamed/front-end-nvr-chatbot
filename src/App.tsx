@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
+import Live from './pages/Live';
 import Chat from './pages/Chat';
 import Search from './pages/Search';
 import Events from './pages/Events';
@@ -9,11 +10,12 @@ import Pipeline from './pages/Pipeline';
 
 export default function App() {
   return (
-    <div className="flex min-h-screen bg-slate-100">
+    <div className="flex flex-1 min-h-screen bg-slate-100">
       <Sidebar />
       <main className="flex-1 overflow-y-auto flex justify-center">
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/live" element={<Live />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/search" element={<Search />} />
           <Route path="/events" element={<Events />} />

@@ -11,6 +11,11 @@ export interface Camera {
   last_seen: string;
 }
 
+export interface LiveCamera {
+  camera_id: string;
+  connected: boolean;
+}
+
 export interface VideoEvent {
   id: number;
   camera_id: string;

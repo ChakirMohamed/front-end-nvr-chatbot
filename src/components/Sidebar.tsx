@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
+  Radio,
   MessageSquare,
   Search,
   List,
@@ -10,6 +11,7 @@ import {
 
 const links = [
   { to: '/', icon: LayoutDashboard, label: 'Tableau de bord' },
+  { to: '/live', icon: Radio, label: 'Vue en direct' },
   { to: '/chat', icon: MessageSquare, label: 'Assistant IA' },
   { to: '/search', icon: Search, label: 'Recherche' },
   { to: '/events', icon: List, label: 'Événements' },
