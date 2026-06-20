@@ -2,14 +2,14 @@ import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   Radio,
-  MessageSquare,
+  Bot,
   GitBranch,
 } from 'lucide-react';
 
 const links = [
+  { to: '/chat', icon: Bot, label: 'ChatBot' },
   { to: '/', icon: LayoutDashboard, label: 'Tableau de bord' },
   { to: '/live', icon: Radio, label: 'Vue en direct' },
-  { to: '/chat', icon: MessageSquare, label: 'Assistant IA' },
   { to: '/pipeline', icon: GitBranch, label: 'Pipeline IA' },
 ];
 
