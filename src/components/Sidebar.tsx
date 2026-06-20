@@ -3,9 +3,6 @@ import {
   LayoutDashboard,
   Radio,
   MessageSquare,
-  Search,
-  List,
-  BarChart3,
   GitBranch,
 } from 'lucide-react';
 
@@ -13,15 +10,12 @@ const links = [
   { to: '/', icon: LayoutDashboard, label: 'Tableau de bord' },
   { to: '/live', icon: Radio, label: 'Vue en direct' },
   { to: '/chat', icon: MessageSquare, label: 'Assistant IA' },
-  { to: '/search', icon: Search, label: 'Recherche' },
-  { to: '/events', icon: List, label: 'Événements' },
-  { to: '/analytics', icon: BarChart3, label: 'Analytique' },
   { to: '/pipeline', icon: GitBranch, label: 'Pipeline IA' },
 ];
 
 export default function Sidebar() {
   return (
-    <aside className="w-56 min-h-screen bg-white border-r border-slate-200 flex flex-col shrink-0">
+    <aside className="w-56 h-screen overflow-hidden bg-white border-r border-slate-200 flex flex-col shrink-0">
       {/* Brand */}
       <div className="px-5 py-5 border-b border-slate-200">
         <div className="flex items-center gap-3">

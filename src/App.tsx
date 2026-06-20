@@ -10,7 +10,7 @@ import Pipeline from './pages/Pipeline';
 
 export default function App() {
   return (
-    <div className="flex flex-1 min-h-screen bg-slate-100">
+    <div className="flex flex-1 h-screen overflow-hidden bg-slate-100">
       <Sidebar />
       <main className="flex-1 overflow-y-auto flex justify-center">
         <Routes>
