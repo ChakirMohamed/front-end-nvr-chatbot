@@ -1,15 +1,22 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Loader2, Video } from 'lucide-react';
+import { Send, Bot, User, Loader2, Video, Play } from 'lucide-react';
 import { api } from '../api';
 import type { ChatResponse } from '../types';
 import IntentBar from '../components/IntentBar';
 import EventCard from '../components/EventCard';
+import ClipModal from '../components/ClipModal';
 
 interface Message {
   id: string;
   role: 'user' | 'assistant';
   text: string;
   data?: ChatResponse;
+}
+
+interface ActiveClip {
+  clipUrl: string;
+  timestamp?: string;
+  objects?: string[];
 }
 
 const EXAMPLES = [
@@ -30,6 +37,7 @@ export default function Chat() {
   ]);
   const [input, setInput]   = useState('');
   const [loading, setLoading] = useState(false);
+  const [activeClip, setActiveClip] = useState<ActiveClip | null>(null);
   const sessionId = useRef(`session-${Date.now()}`);
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -98,6 +106,21 @@ export default function Chat() {
                     confidence={msg.data.classification_info.ml.confidence}
                   />
                 </div>
+              )}
+
+              {msg.data?.clip_url && (
+                <button
+                  type="button"
+                  onClick={() => setActiveClip({
+                    clipUrl: msg.data!.clip_url!,
+                    timestamp: msg.data!.timestamp,
+                    objects: msg.data!.detected_objects,
+                  })}
+                  className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
+                >
+                  <Play size={14} />
+                  Voir le clip
+                </button>
               )}
 
               {msg.data?.events && msg.data.events.length > 0 && (
@@ -169,6 +192,15 @@ export default function Chat() {
           </button>
         </form>
       </div>
+
+      {activeClip && (
+        <ClipModal
+          clipUrl={activeClip.clipUrl}
+          timestamp={activeClip.timestamp}
+          objects={activeClip.objects}
+          onClose={() => setActiveClip(null)}
+        />
+      )}
     </div>
   );
 }

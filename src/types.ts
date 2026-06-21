@@ -42,6 +42,11 @@ export interface ChatResponse {
   events?: VideoEvent[];
   summary?: SummaryResponse;
   classification_info: ClassificationInfo;
+  // Present when the agent resolves a clip_request to a playable clip.
+  clip_url?: string;
+  event_id?: number;
+  timestamp?: string;
+  detected_objects?: string[];
 }
 
 export interface SearchRequest {
